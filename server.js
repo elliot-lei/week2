@@ -113,6 +113,7 @@ const requestListener = async (req, res) => {
                     "name": data.name,
                     "content": data.content,
                     "image": data.image,
+                    "tags": data.tags,
                     "likes": data.likes,
 
                 }
