@@ -105,6 +105,7 @@ const requestListener = async (req, res) => {
         // const index = data.findIndex(e => e._id === id);
         const id = await req.url.split("/").pop();
         const data = JSON.parse(body);
+        console.log(data);
         const patchPost = await Post.findByIdAndUpdate(id,
             {
                 $set:
@@ -162,4 +163,4 @@ const requestListener = async (req, res) => {
 
 
 const server = http.createServer(requestListener);
-server.listen(process.env.PORT);
+server.listen(process.env.PORT || 3005);
