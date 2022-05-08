@@ -105,26 +105,36 @@ const requestListener = async (req, res) => {
         // const index = data.findIndex(e => e._id === id);
         const id = await req.url.split("/").pop();
         const data = JSON.parse(body);
-        console.log(id);
-        const patchPost = await Post.findByIdAndUpdate(id,
-            {
-                $set:
+
+        if (!data.name == '' || !data.content == '') {
+            const patchPost = await Post.findByIdAndUpdate(id,
                 {
-                    "name": data.name,
-                    "content": data.content,
-                    "image": data.image,
-                    "tags": data.tags,
-                    "likes": data.likes,
+                    $set:
+                    {
+                        "name": data.name,
+                        "content": data.content,
+                        "image": data.image,
+                        "tags": data.tags,
+                        "likes": data.likes,
 
-                }
-            });
+                    }
+                });
 
-        res.writeHead(200, headers);
-        res.write(JSON.stringify({
-            "status": "patch item  success",
-            "data": patchPost,
-        }))
-        res.end();
+            res.writeHead(200, headers);
+            res.write(JSON.stringify({
+                "status": "patch item  success",
+                "data": patchPost,
+            }))
+            res.end();
+        } else {
+            res.writeHead(400, headers);
+            res.write(JSON.stringify({
+                "status": "patch item  false",
+                "message": "格式錯誤 請不要空白"
+            }))
+            res.end();
+        }
+
     }
     else if (req.url == "/post" && req.method == "OPTIONS") {
         res.writeHead(200, headers);
