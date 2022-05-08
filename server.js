@@ -105,7 +105,7 @@ const requestListener = async (req, res) => {
         // const index = data.findIndex(e => e._id === id);
         const id = await req.url.split("/").pop();
         const data = JSON.parse(body);
-        console.log(data);
+        console.log(id);
         const patchPost = await Post.findByIdAndUpdate(id,
             {
                 $set:
@@ -121,7 +121,7 @@ const requestListener = async (req, res) => {
         res.writeHead(200, headers);
         res.write(JSON.stringify({
             "status": "patch item  success",
-            "data": data,
+            "data": patchPost,
         }))
         res.end();
     }
