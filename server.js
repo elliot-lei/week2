@@ -121,7 +121,7 @@ const requestListener = async (req, res) => {
         res.writeHead(200, headers);
         res.write(JSON.stringify({
             "status": "patch item  success",
-            "data": patchPost,
+            "data": data,
         }))
         res.end();
     }
