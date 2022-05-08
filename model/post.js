@@ -16,6 +16,7 @@ const postSchema = new mongoose.Schema(
         },
         tags: {
             type: Number,
+            default: 0
         },
         likes: {
             type: Number,
